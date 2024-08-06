@@ -16,12 +16,15 @@ import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication";
-
+import { action as logoutAction } from "./pages/Logout";
+import { authLoader } from "./util/auth";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    loader: authLoader,
+    id: "auth",
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -66,6 +69,10 @@ const router = createBrowserRouter([
         path: "auth",
         element: <AuthenticationPage />,
         action: authAction,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
       },
     ],
   },
